@@ -1,0 +1,32 @@
+group 'Lucene'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+buildDir 'target'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+[compileJava, compileTestJava]*.options*.encoding = 'UTF8'
+
+sourceSets {
+    main {
+        output.classesDir "$buildDir/classes"
+    }
+}
+
+repositories {
+    maven { url("https://clojars.org/repo/") }
+    flatDir {
+        dirs "$rootProject.projectDir/libs"
+    }
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'org.apache.lucene', name: 'lucene-core', version: '6.5.1'
+    compile group: 'org.apache.lucene', name: 'lucene-demo', version: '6.5.1'
+    compile name: 'arirang.lucene-analyzer-6.2-1.1.0'
+    compile name: 'arirang-morph-1.1.0'
+}
